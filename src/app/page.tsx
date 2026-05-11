@@ -16,8 +16,8 @@ export default function Home() {
             <a href="#download" className="hover:text-primary transition-colors">Download</a>
           </nav>
           <div className="flex gap-4">
-            <button className="text-sm font-medium px-4 py-2 hover:text-primary transition-colors">Login</button>
-            <button className="text-sm font-bold bg-primary text-white px-5 py-2 rounded-full hover:bg-blue-600 transition-all shadow-[0_0_15px_rgba(59,130,246,0.4)]">Get Premium</button>
+            <a href="/login" className="text-sm font-medium px-4 py-2 hover:text-primary transition-colors flex items-center">Login</a>
+            <a href="/login" className="text-sm font-bold bg-primary text-white px-5 py-2 rounded-full hover:bg-blue-600 transition-all shadow-[0_0_15px_rgba(59,130,246,0.4)] flex items-center">Get Premium</a>
           </div>
         </div>
       </header>
