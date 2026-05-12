@@ -1,4 +1,5 @@
 import Image from "next/image";
+import UpgradeButton from "./dashboard/UpgradeButton";
 
 export default function Home() {
   return (
@@ -37,9 +38,9 @@ export default function Home() {
             Bypass restrictions instantly with the most advanced VPN protocol. Zero logs. Global access. Total freedom.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="px-8 py-4 bg-primary text-white rounded-full font-bold text-lg hover:bg-blue-600 transition-all shadow-[0_0_20px_rgba(59,130,246,0.5)]">
+            <UpgradeButton plan="1_month" className="px-8 py-4 bg-primary text-white rounded-full font-bold text-lg hover:bg-blue-600 transition-all shadow-[0_0_20px_rgba(59,130,246,0.5)]">
               Get Premium Now
-            </button>
+            </UpgradeButton>
             <button className="px-8 py-4 bg-card border border-white/10 rounded-full font-bold text-lg hover:bg-white/5 transition-all">
               Download App
             </button>
@@ -96,9 +97,9 @@ export default function Home() {
                   </li>
                 ))}
               </ul>
-              <button className="w-full py-4 rounded-xl font-bold bg-white/5 hover:bg-white/10 transition-colors">
+              <UpgradeButton plan="1_month" className="w-full py-4 rounded-xl font-bold bg-white/5 hover:bg-white/10 transition-colors">
                 Choose Plan
-              </button>
+              </UpgradeButton>
             </div>
 
             {/* 1 Year */}
@@ -119,9 +120,9 @@ export default function Home() {
                   </li>
                 ))}
               </ul>
-              <button className="w-full py-4 rounded-xl font-bold bg-primary text-white hover:bg-blue-600 transition-colors shadow-[0_0_15px_rgba(59,130,246,0.4)]">
+              <UpgradeButton plan="1_year" className="w-full py-4 rounded-xl font-bold bg-primary text-white hover:bg-blue-600 transition-colors shadow-[0_0_15px_rgba(59,130,246,0.4)]">
                 Choose Plan
-              </button>
+              </UpgradeButton>
             </div>
           </div>
         </div>

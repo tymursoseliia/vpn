@@ -2,6 +2,7 @@ import { createClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
 import { provisionVpnUser } from '@/actions/marzban';
 import DashboardClient from './DashboardClient';
+import UpgradeButton from './UpgradeButton';
 
 export default async function DashboardPage() {
   const supabase = await createClient();
@@ -89,9 +90,9 @@ export default async function DashboardPage() {
             </div>
             
             {!isPremium && (
-              <button className="w-full py-3.5 bg-gradient-to-r from-yellow-500 to-yellow-600 text-black rounded-xl font-bold hover:opacity-90 transition-opacity shadow-[0_0_15px_rgba(234,179,8,0.3)]">
+              <UpgradeButton plan="1_month">
                 Upgrade to Premium
-              </button>
+              </UpgradeButton>
             )}
           </div>
 
