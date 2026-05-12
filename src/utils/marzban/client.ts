@@ -67,14 +67,13 @@ export async function createVpnUser(email: string) {
 
     const userData = await response.json();
     
-    // Возвращаем первую сгенерированную ссылку
-    const vlessLink = userData.links && userData.links.length > 0 
-      ? userData.links[0] 
+    const subUrl = userData.subscription_url 
+      ? `${process.env.MARZBAN_API_URL}${userData.subscription_url}`
       : null;
 
     return {
       username: userData.username,
-      link: vlessLink
+      link: subUrl
     };
   } catch (error) {
     console.error('Marzban create user error:', error);
