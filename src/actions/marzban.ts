@@ -118,8 +118,9 @@ export async function provisionVpnUser() {
         : null 
     };
 
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Provisioning error:', error);
-    return { error: error.message || 'Failed to provision VPN user' };
+    if (error instanceof Error) return { error: error.message };
+    return { error: 'Failed to provision VPN user' };
   }
 }

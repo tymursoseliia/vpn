@@ -114,7 +114,7 @@ export default async function DashboardPage() {
             <div>
               <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold mb-4">3</div>
               <h3 className="font-semibold mb-2">Add Profile</h3>
-              <p className="text-sm text-foreground/60">Open the app, click "Add Profile" and paste your link. You are protected!</p>
+              <p className="text-sm text-foreground/60">Open the app, click &quot;Add Profile&quot; and paste your link. You are protected!</p>
             </div>
           </div>
         </div>

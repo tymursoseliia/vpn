@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { createClient } from '@/utils/supabase/client';
+import Link from 'next/link';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -29,8 +30,9 @@ export default function LoginPage() {
         if (error) throw error;
         setError('Check your email for the confirmation link!');
       }
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      if (err instanceof Error) setError(err.message);
+      else setError(String(err));
     } finally {
       setLoading(false);
     }
@@ -133,9 +135,9 @@ export default function LoginPage() {
         </div>
 
         <div className="mt-8 text-center">
-          <a href="/" className="text-sm text-foreground/40 hover:text-white transition-colors">
+          <Link href="/" className="text-sm text-foreground/40 hover:text-white transition-colors">
             ← Back to Home
-          </a>
+          </Link>
         </div>
       </div>
     </div>
