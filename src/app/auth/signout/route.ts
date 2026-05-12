@@ -1,12 +1,21 @@
 import { createClient } from '@/utils/supabase/server'
+import { revalidatePath } from 'next/cache'
 import { NextResponse } from 'next/server'
 
 export async function POST(request: Request) {
   const supabase = await createClient()
 
-  // Очищаем сессию пользователя
-  await supabase.auth.signOut()
+  // Check if a user's logged in
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
 
-  // Возвращаем пользователя на главную
-  return NextResponse.redirect(new URL('/', request.url))
+  if (user) {
+    await supabase.auth.signOut()
+  }
+
+  revalidatePath('/', 'layout')
+  return NextResponse.redirect(new URL('/', request.url), {
+    status: 302,
+  })
 }
