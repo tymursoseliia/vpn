@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { createClient } from '@/utils/supabase/client';
 import Link from 'next/link';
+import TelegramLoginWidget from '@/components/TelegramLoginWidget';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -121,6 +122,10 @@ export default function LoginPage() {
               </svg>
               Google
             </button>
+
+            <div className="mt-4">
+              <TelegramLoginWidget />
+            </div>
           </div>
 
           <div className="mt-8 text-center text-sm text-foreground/60">
