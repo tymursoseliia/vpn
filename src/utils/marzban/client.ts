@@ -52,6 +52,9 @@ export async function createVpnUser(email: string) {
         username: username,
         proxies: {
           "vless": {}
+        },
+        inbounds: {
+          "vless": ["VLESS TCP REALITY"]
         }
       }),
       cache: 'no-store'
