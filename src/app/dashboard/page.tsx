@@ -110,7 +110,7 @@ export default async function DashboardPage() {
             <div>
               <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold mb-4">2</div>
               <h3 className="font-semibold mb-2">Download App</h3>
-              <p className="text-sm text-foreground/60">Download the PhantomLink app for iOS, Android, macOS, or Windows.</p>
+              <p className="text-sm text-foreground/60">Download the PhantomLink app from our <a href="https://github.com/tymursoseliia/PhantomLink/releases" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Releases page</a> for iOS, Android, macOS, or Windows.</p>
             </div>
             <div>
               <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold mb-4">3</div>

@@ -41,9 +41,9 @@ export default function Home() {
             <UpgradeButton plan="1_month" className="px-8 py-4 bg-primary text-white rounded-full font-bold text-lg hover:bg-blue-600 transition-all shadow-[0_0_20px_rgba(59,130,246,0.5)]">
               Get Premium Now
             </UpgradeButton>
-            <button className="px-8 py-4 bg-card border border-white/10 rounded-full font-bold text-lg hover:bg-white/5 transition-all">
+            <a href="https://github.com/tymursoseliia/PhantomLink/releases" target="_blank" rel="noopener noreferrer" className="px-8 py-4 bg-card border border-white/10 rounded-full font-bold text-lg hover:bg-white/5 transition-all text-center inline-block">
               Download App
-            </button>
+            </a>
           </div>
         </div>
       </section>
