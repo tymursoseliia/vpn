@@ -1,36 +1,28 @@
-const url = 'https://us.phantomlink.cc:8000/api/admin/token';
-const body = new URLSearchParams({
-  grant_type: 'password',
-  username: 'admin',
-  password: 'OypimOY2WJaTAdIfl9'
-});
+const url = 'https://us.phantomlink.cc:8000';
+const username = 'admin';
+const password = 'OypimOY2WJaTAdIfl9';
 
-fetch(url, {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/x-www-form-urlencoded',
-    'Accept': 'application/json'
-  },
-  body: body.toString()
-}).then(res => res.json()).then(data => {
-  const token = data.access_token;
+async function test() {
+  const tokenRes = await fetch(`${url}/api/admin/token`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams({ grant_type: 'password', username, password })
+  });
+  const { access_token } = await tokenRes.json();
   
-  const createUrl = 'https://us.phantomlink.cc:8000/api/user';
-  return fetch(createUrl, {
+  const createRes = await fetch(`${url}/api/user`, {
     method: 'POST',
     headers: {
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
+      'Authorization': `Bearer ${access_token}`,
+      'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      username: 'testuser_' + Date.now(),
-      proxies: {
-        "vless": {}
-      },
-      inbounds: {
-        "vless": ["VLESS TCP REALITY"]
-      }
+      username: "free_12345678901234567890123456789012",
+      proxies: { "vless": {} },
+      inbounds: { "vless": ["VLESS TCP REALITY"] }
     })
   });
-}).then(res => res.text()).then(console.log).catch(console.error);
+  console.log("Status:", createRes.status);
+  console.log("Response:", await createRes.text());
+}
+test();
