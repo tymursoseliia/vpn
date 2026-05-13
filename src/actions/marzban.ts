@@ -104,8 +104,8 @@ export async function provisionVpnUser() {
     
     const isPremium = profile?.is_premium || false;
     
-    // Marzban usernames shouldn't have hyphens if strict, so we sanitize UID
-    const safeUid = user.id.replace(/-/g, '');
+    // Marzban usernames shouldn't have hyphens and must be < 32 chars
+    const safeUid = user.id.replace(/-/g, '').substring(0, 16);
     const marzbanUsername = isPremium ? `prem_${safeUid}` : `free_${safeUid}`;
 
     const token = await getAdminToken();
