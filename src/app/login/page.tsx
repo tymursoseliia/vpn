@@ -107,7 +107,7 @@ export default function LoginPage() {
                 await supabase.auth.signInWithOAuth({
                   provider: 'google',
                   options: {
-                    redirectTo: `https://phantomlink1.netlify.app/auth/callback`,
+                    redirectTo: `${window.location.origin}/auth/callback`,
                   },
                 });
               }}
