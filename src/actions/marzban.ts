@@ -95,8 +95,14 @@ export async function provisionVpnUser() {
 
   try {
     // Generate username: prefix 'free_' for free users + supabase UID
-    // Since we don't have premium logic yet, default to free
-    const isPremium = false; // TODO: read from user profile/db later
+    // Read from user profile/db to determine premium status
+    const { data: profile } = await supabase
+      .from('profiles')
+      .select('is_premium')
+      .eq('id', user.id)
+      .single();
+    
+    const isPremium = profile?.is_premium || false;
     
     // Marzban usernames shouldn't have hyphens if strict, so we sanitize UID
     const safeUid = user.id.replace(/-/g, '');

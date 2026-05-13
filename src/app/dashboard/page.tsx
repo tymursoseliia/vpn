@@ -12,8 +12,14 @@ export default async function DashboardPage() {
     redirect('/login');
   }
 
-  // Check if they are premium in Supabase (stub for now, later fetch from profile table)
-  const isPremium = false; 
+  // Fetch profile from Supabase
+  const { data: profile } = await supabase
+    .from('profiles')
+    .select('is_premium')
+    .eq('id', user.id)
+    .single();
+
+  const isPremium = profile?.is_premium || false;
 
   // Provision / Fetch VPN user from Marzban
   const provisionResult = await provisionVpnUser();
