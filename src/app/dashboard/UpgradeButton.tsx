@@ -10,7 +10,7 @@ export default function UpgradeButton({ plan = '1_month', children, className }:
   const handleCheckout = async () => {
     setLoading(true);
     try {
-      const res = await fetch('/api/checkout/cryptomus', {
+      const res = await fetch('/api/checkout/nowpayments', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ plan })
