@@ -136,14 +136,14 @@ export default function Home() {
             <p className="text-foreground/70">Get the app for your favorite device and connect in seconds.</p>
           </div>
           <div className="flex flex-wrap justify-center gap-6">
-            <a href="https://github.com/tymursoseliia/PhantomLink/releases/download/v1.0.0/PhantomLink-Windows.1.zip" className="flex flex-col items-center justify-center p-8 w-64 rounded-3xl bg-card border border-white/10 hover:border-primary/50 hover:bg-white/5 transition-all group">
+            <a href="https://github.com/tymursoseliia/PhantomLink/releases/download/v1.0.0/PhantomLink-Windows-Setup.exe" className="flex flex-col items-center justify-center p-8 w-64 rounded-3xl bg-card border border-white/10 hover:border-primary/50 hover:bg-white/5 transition-all group">
               <div className="w-16 h-16 bg-primary/20 rounded-2xl flex items-center justify-center mb-6 text-primary group-hover:scale-110 transition-transform">
                 <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.951-1.801"/></svg>
               </div>
               <h3 className="text-xl font-bold mb-2">Windows</h3>
               <p className="text-sm text-foreground/50">Windows 10 & 11</p>
             </a>
-            <a href="https://github.com/tymursoseliia/PhantomLink/releases/download/v1.0.0/PhantomLink.4.1.2.dmg" className="flex flex-col items-center justify-center p-8 w-64 rounded-3xl bg-card border border-white/10 hover:border-primary/50 hover:bg-white/5 transition-all group">
+            <a href="https://github.com/tymursoseliia/PhantomLink/releases" className="flex flex-col items-center justify-center p-8 w-64 rounded-3xl bg-card border border-white/10 hover:border-primary/50 hover:bg-white/5 transition-all group">
               <div className="w-16 h-16 bg-primary/20 rounded-2xl flex items-center justify-center mb-6 text-primary group-hover:scale-110 transition-transform">
                 <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13.12 4.22c.7-.84 1.17-2.01 1.04-3.18-1.01.04-2.26.67-2.98 1.53-.64.75-1.2 1.95-1.04 3.09 1.12.09 2.28-.59 2.98-1.44"/></svg>
               </div>
