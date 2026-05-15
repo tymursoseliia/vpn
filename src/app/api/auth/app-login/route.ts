@@ -43,14 +43,76 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Profile not found' }, { status: 404 });
     }
 
-    if (!profileData.sub_link) {
-      return NextResponse.json({ error: 'No active subscription found. Please buy Premium on the website.' }, { status: 403 });
+    let finalSubLink = profileData.sub_link;
+
+    if (!finalSubLink) {
+      // Auto-generate the VPN Key on the fly if it doesn't exist
+      const safeUid = userId.replace(/-/g, '').substring(0, 16);
+      const isPremium = profileData.is_premium || false;
+      const marzbanUsername = isPremium ? `prem_${safeUid}` : `free_${safeUid}`;
+
+      const MARZBAN_API_URL = process.env.MARZBAN_API_URL || 'https://us.phantomlink.cc:8000';
+      const MARZBAN_USERNAME = process.env.MARZBAN_USERNAME || 'admin';
+      const MARZBAN_PASSWORD = process.env.MARZBAN_PASSWORD || 'OypimOY2WJaTAdIfl9';
+
+      // 1. Get Admin Token
+      const body = new URLSearchParams({
+        grant_type: 'password',
+        username: MARZBAN_USERNAME,
+        password: MARZBAN_PASSWORD
+      });
+
+      const tokenRes = await fetch(`${MARZBAN_API_URL}/api/admin/token`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Accept': 'application/json'
+        },
+        body: body.toString(),
+      });
+      
+      const tokenData = await tokenRes.json();
+      const token = tokenData.access_token;
+
+      // 2. Create Marzban User
+      const createRes = await fetch(`${MARZBAN_API_URL}/api/user`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          username: marzbanUsername,
+          proxies: { "vless": {} },
+          inbounds: { "vless": ["VLESS TCP REALITY"] }
+        })
+      });
+
+      let marzbanUser;
+      if (createRes.status === 409) {
+        // User already exists in Marzban but not in Supabase, fetch it
+        const getRes = await fetch(`${MARZBAN_API_URL}/api/user/${marzbanUsername}`, {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        marzbanUser = await getRes.json();
+      } else {
+        marzbanUser = await createRes.json();
+      }
+
+      finalSubLink = `${MARZBAN_API_URL}${marzbanUser.subscription_url}`;
+
+      // 3. Save it to Supabase
+      await supabase
+        .from('supabase_profiles')
+        .update({ sub_link: finalSubLink })
+        .eq('id', userId);
     }
 
     // 3. Return the sub_link back to the mobile app
     return NextResponse.json({ 
       success: true, 
-      sub_link: profileData.sub_link,
+      sub_link: finalSubLink,
       is_premium: profileData.is_premium
     }, { status: 200 });
 
