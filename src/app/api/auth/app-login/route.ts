@@ -29,7 +29,7 @@ export async function POST(request: Request) {
     });
 
     if (authError || !authData.user) {
-      return NextResponse.json({ error: 'Invalid email or password' }, { status: 401 });
+      return NextResponse.json({ error: authError ? authError.message : 'User not found' }, { status: 401 });
     }
 
     const userId = authData.user.id;
