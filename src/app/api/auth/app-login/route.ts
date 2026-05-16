@@ -34,9 +34,9 @@ export async function POST(request: Request) {
 
     const userId = authData.user.id;
 
-    // 2. Fetch the user's sub_link from supabase_profiles
+    // 2. Fetch the user's sub_link from profiles
     const { data: profileData, error: profileError } = await supabase
-      .from('supabase_profiles')
+      .from('profiles')
       .select('sub_link, is_premium')
       .eq('id', userId)
       .single();
@@ -106,7 +106,7 @@ export async function POST(request: Request) {
 
       // 3. Save it to Supabase
       await supabase
-        .from('supabase_profiles')
+        .from('profiles')
         .update({ sub_link: finalSubLink })
         .eq('id', userId);
     }
