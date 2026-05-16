@@ -35,14 +35,27 @@ export async function POST(request: Request) {
     const userId = authData.user.id;
 
     // 2. Fetch the user's sub_link from profiles
-    const { data: profileData, error: profileError } = await supabase
+    let profileData;
+    const { data: existingProfile, error: profileError } = await supabase
       .from('profiles')
       .select('sub_link, is_premium')
       .eq('id', userId)
       .single();
 
-    if (profileError || !profileData) {
-      return NextResponse.json({ error: 'Profile not found' }, { status: 404 });
+    if (profileError || !existingProfile) {
+      // Profile doesn't exist, create it automatically
+      const { data: newProfile, error: insertError } = await supabase
+        .from('profiles')
+        .insert({ id: userId, email: email, is_premium: false })
+        .select('sub_link, is_premium')
+        .single();
+        
+      if (insertError) {
+        return NextResponse.json({ error: 'Failed to initialize profile' }, { status: 500 });
+      }
+      profileData = newProfile;
+    } else {
+      profileData = existingProfile;
     }
 
     let finalSubLink = profileData.sub_link;
